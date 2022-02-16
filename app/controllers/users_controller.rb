@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :ensure_correct_user, only: [:update]
+  # before_action :ensure_correct_user, only: [:update]
+  before_action :ensure_correct_user, only: [:update, :edit] #2022/2/16(debug)
 
   def show
     @user = User.find(params[:id])
@@ -13,13 +14,16 @@ class UsersController < ApplicationController
   end #2022/2/15(debug)
 
   def edit
+    @user = User.find(params[:id]) #2022/2/16(debug)
   end
 
   def update
     if @user.update(user_params)
-      redirect_to users_path(@user), notice: "You have updated user successfully."
+      # redirect_to users_path(@user), notice: "You have updated user successfully."
+      redirect_to user_path(@user), notice: "You have updated user successfully." #2022/2/16(debug)
     else
-      render "show"
+      # render "show"
+      render "edit" #2022/2/16(debug)
     end
   end
 
