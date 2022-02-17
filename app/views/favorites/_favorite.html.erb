@@ -1,0 +1,10 @@
+<!--いいね機能の追加(2022/2/17)-->
+<% if book.favorited_by?(current_user) %>
+  <%= link_to book_favorites_path(book), method: :delete do %>
+    ♥<%=book.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to book_favorites_path(book), method: :post do %>
+    ♡<%=book.favorites.count %>
+  <% end %>
+<% end %>
