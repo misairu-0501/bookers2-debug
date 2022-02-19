@@ -1,0 +1,14 @@
+<h2><%= "#{@range}s search for \"#{@word}\"" %></h2>
+<p>検索結果:<%= @searches.count %>件</p>
+<!--検索結果が0件でないときのみ以下を表示-->
+<% unless @searches.count == 0 %>
+  <% if @range == "User" %>
+    <%= render 'users/index', users: @searches %>
+  <% elsif @range == "Book" %>
+    <%= render 'books/index', books: @searches %>
+  <% else %>
+    <!--検索するモデルに追加があったら記載-->
+  <% end %>
+<% end %>
+
+

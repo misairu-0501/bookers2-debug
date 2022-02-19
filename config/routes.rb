@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     get "relationships/followers" => "relationships#followers", as: "followers"
   end
 
+  get "searches/search" => "searches#search", as: "search"
+  get "searches/result" => "searches#result", as: "result"
+
   # devise_for :users #2022/2/15(debug)
 
 end #2022/2/15(debug)
