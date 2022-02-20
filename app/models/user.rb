@@ -40,18 +40,19 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  #検索方法分岐
   def self.looks(search, word)
-    if search == "perfect_match"
-      @users = User.where("name Like?", "#{word}")
-    elsif search == "forward_match"
-      @users = User.where("name Like?", "#{word}%")
-    elsif search == "backward_match"
-      @users = User.where("name Like?", "%#{word}")
-    elsif search == "partial_match"
-      @users = User.where("name Like?", "%#{word}%")
+    case search
+    when "perfect_match"
+      User.where("name Like?", "#{word}")
+    when "forward_match"
+      User.where("name Like?", "#{word}%")
+    when "backward_match"
+      User.where("name Like?", "%#{word}")
+    when "partial_match"
+      User.where("name Like?", "%#{word}%")
     else
-      #検索方法を追加する場合記載
+       #検索方法を追加する場合記載
     end
   end
+
 end
