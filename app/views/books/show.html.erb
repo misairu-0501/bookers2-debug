@@ -23,7 +23,9 @@
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
           <!--いいね機能の追加(2022/2/17)-->
-          <td><%= render 'favorites/favorite', book: @book %></td>
+          <td id="favorite_buttons_<%= @book.id %>">
+            <%= render 'favorites/favorite', book: @book %>
+          </td>
           <!--コメント数を表示-->
           <td>コメント数<%= @book.book_comments.count %></td>
           <!--2022/2/16(debug)-->
@@ -33,28 +35,14 @@
           <% end %>
         </tr>
       </table>
-      <!--全コメントを表示-->
-      <h2>Comment</h2>
-      <table class="table-borderless mb-3">
-        <% @book.book_comments.each do |book_comment| %>
-          <tr>
-            <td><%= link_to(book_comment.user) do %>
-                <%= image_tag book_comment.user.get_profile_image, size:"50x50" %><br>
-                <%= book_comment.user.name %>
-              <% end %>
-            </td>
-            <td><%= book_comment.comment %></td>
-            <%if book_comment.user == current_user %>
-              <td><%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
+
+      <h2>Book comment</h2>
+      <!--全コメントを表示(非同期通信)-->
+      <div id="book_comments">
+        <%= render "book_comments/index", book: @book %>
+      </div>
       <!--コメントフォーム-->
-      <%= form_with model: [@book, @book_comment], local: true do |f| %>
-        <%= f.text_area :comment, rows: '2', class: "form-control form-control-lg"%><br>
-        <%= f.submit "送信" %>
-      <% end %>
+      <%= render "book_comments/form", {book: @book, book_comment: @book_comment} %>
     </div>
   </div>
 </div>

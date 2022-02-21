@@ -1,27 +1,23 @@
 class BookCommentsController < ApplicationController
 
   def create
-    book = Book.find(params[:book_id])
+    @book = Book.find(params[:book_id]) #非同期通信のためインスタンス変数に変更
 
-    # comment = current_user.book_comments.new(book_comment_params)
-    #上記１行は下記２行と同義
-    comment = BookComment.new(book_comment_params)
-    comment.user_id = current_user.id
+    book_comment = BookComment.new(book_comment_params)
+    book_comment.user_id = current_user.id
 
-    comment.book_id = book.id
-    comment.save
+    book_comment.book_id = @book.id
+    book_comment.save
 
-    # redirect_back(fallback_location: root_path) #直前のページにリダイレクト
-    #上記１行は下記１行と同義
-    redirect_to request.referer #直前のページにリダイレクト
+    # redirect_to request.referer #非同期通信のため削除
   end
 
   def destroy
-    BookComment.find(params[:id]).destroy
+    @book = Book.find(params[:book_id]) #非同期通信のためインスタンス変数@bookを用意
+    book_comment = BookComment.find(params[:id])
+    book_comment.destroy
 
-    # redirect_back(fallback_location: root_path) #直前のページにリダイレクト
-    #上記１行は下記１行と同義
-    redirect_to request.referer #直前のページにリダイレクト
+    # redirect_to request.referer #非同期通信のため削除
   end
 
   private
