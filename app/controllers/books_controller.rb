@@ -4,12 +4,23 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @new_book = Book.new #2022/2/16(debug)
     @user = User.find(@book.user_id) #2022/2/16(debug)
-    
+
     @book_comment = BookComment.new
   end
 
   def index
-    @books = Book.all
+    # @books = Book.all
+    #過去一週間でいいねの合計カウントが多い順に投稿を表示
+    # to = Time.current.at_end_of_day
+    # from = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorited_users).
+     sort{|a, b|
+      # b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
+      # a.favorited_users.includes(:favorites).where(created_at: from...to).size
+      b.favorited_users.includes(:favorites).size <=>
+      a.favorited_users.includes(:favorites).size
+     }
+
     @book = Book.new
   end
 

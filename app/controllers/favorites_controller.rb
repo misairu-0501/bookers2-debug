@@ -16,6 +16,7 @@ class FavoritesController < ApplicationController
 
   def destroy
     @book = Book.find(params[:book_id]) #インスタンス変数@bookとしたのは/bookers2-debug/app/views/favorites/destroy.js.erbに渡すため
+
     favorite = current_user.favorites.find_by(book_id: @book.id)
     favorite.destroy
 

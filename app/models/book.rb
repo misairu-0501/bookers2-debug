@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :user #2022/2/15(debug)
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
   has_many :book_comments, dependent: :destroy
 
   validates :title,presence:true
