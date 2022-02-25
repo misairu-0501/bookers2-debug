@@ -9,16 +9,12 @@ class BooksController < ApplicationController
   end
 
   def index
-    # @books = Book.all
     #過去一週間でいいねの合計カウントが多い順に投稿を表示
-    # to = Time.current.at_end_of_day
-    # from = (to - 6.day).at_beginning_of_day
-    @books = Book.includes(:favorited_users).
-     sort{|a, b|
-      # b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
-      # a.favorited_users.includes(:favorites).where(created_at: from...to).size
-      b.favorited_users.includes(:favorites).size <=>
-      a.favorited_users.includes(:favorites).size
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.all.sort{|a, b|
+      b.favorites.where(created_at: from...to).size <=>
+      a.favorites.where(created_at: from...to).size
      }
 
     @book = Book.new
