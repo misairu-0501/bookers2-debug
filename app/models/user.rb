@@ -16,6 +16,9 @@ class User < ApplicationRecord
   #一覧画面で使用
   has_many :followings, through: :relationships, source: :followed # 自分がフォローしている人
   has_many:followers, through: :reverse_of_relationships, source: :follower # 自分をフォローしている人(自分がフォローされている人)
+  #DM機能で使用
+  has_many :user_rooms
+  has_many :chats
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: {maximum: 50} #2022/2/16(debug)

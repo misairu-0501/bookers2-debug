@@ -39,4 +39,10 @@
       <%= link_to "フォローする", user_relationships_path(user), method: :post, class: "btn btn-success" %>
     <% end %>
   <% end %>
+
+  <!--DM用のボタンを設置-->
+  <!--カレントユーザでない　かつ　相互フォローの場合のみ-->
+  <% if (current_user!= @user) &&  (current_user.following?(@user)) && (@user.following?(current_user)) %>
+    <%= link_to "チャットを始める", chat_path(@user), class: "btn btn-outline-primary ml-1" %>
+  <% end %>
 </div>
