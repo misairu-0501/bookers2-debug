@@ -1,11 +1,19 @@
 class BooksController < ApplicationController
 
+  impressionist unique: [:session_hash] #PV数取得用
+  #下の記述だと同じアカウントから複数回記事を見た場合全てカウントされる
+  # impressionist :actions=>[:show]
+
   def show
     @book = Book.find(params[:id])
     @new_book = Book.new #2022/2/16(debug)
     @user = User.find(@book.user_id) #2022/2/16(debug)
 
     @book_comment = BookComment.new
+
+    #PV取得用(同じアカウントから記事を見た場合は1PV)
+    #(一度ログアウトすると再度カウントできるようになる)
+    impressionist(@book, nil, unique:[:session_hash])
   end
 
   def index

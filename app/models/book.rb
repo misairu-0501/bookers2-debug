@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+
+  is_impressionable #PV数カウント用
+
   belongs_to :user #2022/2/15(debug)
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
