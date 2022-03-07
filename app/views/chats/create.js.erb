@@ -1,0 +1,13 @@
+$('.message').append("\
+      <div>\
+        <%= @chat.message %>\
+        <%= @chat.created_at.strftime("<%Y-%m-%d %H:%M>") %>\
+      </div>\
+");
+$('textarea').val("")
+
+$('.errors').html("<span></span>");
+
+<!--.get_profile_imageを使用すると非同期通信ができない-->
+<!--Bootstrapを使用すると非同期通信ができない-->
+

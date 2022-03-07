@@ -35,8 +35,10 @@
   <% end %>
 </div>
 
+<div class="errors"></div>
+
 <div class="mt-3">
-  <%= form_with model: @chat, local: true do |f| %>
+  <%= form_with model: @chat, local: false do |f| %>
     <%= f.text_area :message, row: "2", placeholder: "メッセージを入力して下さい（140文字以内）", class: "input-group input-group-lg" %>
     <%= f.hidden_field :room_id %>
     <%= f.submit "投稿" %>
