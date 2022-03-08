@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'chats/show'
   root to:"homes#top" #2022/2/15(debug)
   devise_for :users #2022/2/15(debug)
 
@@ -21,6 +20,8 @@ Rails.application.routes.draw do
   get "searches/result" => "searches#result", as: "result"
 
   resources :chats, only: [:show, :create]
+
+  resources :groups, only: [:new, :index, :show, :edit, :create, :update]
 
   # devise_for :users #2022/2/15(debug)
 
