@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
   resources :chats, only: [:show, :create]
 
-  resources :groups, only: [:new, :index, :show, :edit, :create, :update]
+  resources :groups, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
+    get "join" => "groups#join"
+  end
 
   # devise_for :users #2022/2/15(debug)
 
