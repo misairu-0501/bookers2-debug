@@ -58,3 +58,5 @@ gem 'devise'
 gem 'jquery-rails' #非同期通信
 
 gem 'impressionist' #PV数取得
+
+gem 'dotenv-rails' #環境変数使用
