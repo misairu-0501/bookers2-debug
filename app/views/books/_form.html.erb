@@ -7,6 +7,16 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+
+  <!--星５段階評価(評価をつけられるタイミングは、投稿時に限定)-->
+  <%if controller.action_name == "edit" %>
+    <div class="book-evaluation mb-3" data-score="<%= book.evaluation %>"></div>
+  <% else %>
+    <div id="evaluate_stars", class="mb-3">
+      <label>Rate</label>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>

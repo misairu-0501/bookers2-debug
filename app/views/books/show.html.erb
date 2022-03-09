@@ -29,6 +29,7 @@
           <!--コメント数を表示-->
           <td id="comments_count">コメント数:<%= @book.book_comments.count %></td>
           <td>閲覧数::<%= @book.impressionist_count %></td>
+          <td class="book-evaluation" data-score="<%= @book.evaluation %>"></td>
           <!--2022/2/16(debug)-->
           <% if @user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>

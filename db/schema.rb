@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_08_005310) do
+ActiveRecord::Schema.define(version: 2022_03_09_072610) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,13 +48,8 @@ ActiveRecord::Schema.define(version: 2022_03_08_005310) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+# Could not dump table "books" because of following StandardError
+#   Unknown type 'flot' for column 'evaluation'
 
   create_table "chats", force: :cascade do |t|
     t.integer "user_id", null: false
