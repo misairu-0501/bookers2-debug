@@ -15,10 +15,17 @@ class BooksController < ApplicationController
     #過去一週間でいいねの合計カウントが多い順に投稿を表示
     to = Time.current.at_end_of_day
     from = (to - 6.day).at_beginning_of_day
-    @books = Book.all.sort{|a, b|
-      b.favorites.where(created_at: from...to).size <=>
-      a.favorites.where(created_at: from...to).size
-     }
+
+    if params[:sort] == "created_at"
+      @books = Book.order(created_at: :ASC)
+    elsif params[:sort] == "evaluation"
+      @books = Book.order(evaluation: :DESC)
+    else
+      @books = Book.all.sort{|a, b|
+        b.favorites.where(created_at: from...to).size <=>
+        a.favorites.where(created_at: from...to).size
+       }
+    end
 
     @book = Book.new
   end
