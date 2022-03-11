@@ -7,6 +7,10 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.text_field :category, class: 'form-control book_body' %>
+  </div>
 
   <!--星５段階評価(評価をつけられるタイミングは、投稿時に限定)-->
   <%if controller.action_name == "edit" %>

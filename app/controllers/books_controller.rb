@@ -16,10 +16,10 @@ class BooksController < ApplicationController
     to = Time.current.at_end_of_day
     from = (to - 6.day).at_beginning_of_day
 
-    if params[:sort] == "created_at"
-      @books = Book.order(created_at: :ASC)
-    elsif params[:sort] == "evaluation"
-      @books = Book.order(evaluation: :DESC)
+    if params[:sort] != nil
+      @books = Book.order(params[:sort])
+    elsif params[:search] != nil
+      @books = Book.where(category: params[:search])
     else
       @books = Book.all.sort{|a, b|
         b.favorites.where(created_at: from...to).size <=>
@@ -72,6 +72,6 @@ class BooksController < ApplicationController
 
   def book_params
     # params.require(:book).permit(:title)
-    params.require(:book).permit(:title, :body, :evaluation) #2022/2/16(debug)
+    params.require(:book).permit(:title, :body, :category, :evaluation) #2022/2/16(debug)
   end
 end

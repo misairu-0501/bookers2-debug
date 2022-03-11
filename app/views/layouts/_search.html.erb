@@ -6,5 +6,10 @@
       <%= f.select :search, options_for_select([["完全一致", "perfect_match"], ["前方一致", "forward_match"], ["後方一致", "backward_match"], ["部分一致", "partial_match"]]) %>
       <%= f.submit "検索" %>
     <% end %>
+
+    <%= form_tag books_path, method: :get, class: "ml-3" do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag "カテゴリー検索" %>
+    <% end %>
   </div>
 <% end %>
